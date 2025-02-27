@@ -61,9 +61,10 @@ function ContentBox({ profile }) {
       <Box>
         <Title>취미</Title>
         <Content>
-          {profile?.hobby && profile.hobby.length > 0
-            ? profile.hobby.join(", ") // ✅ 선택된 취미 쉼표(,)로 구분하여 출력
-            : "입력해주세요"}
+          {/* {profile?.hobby && profile?.hobby?.length > 0
+            ? profile.hobby?.join(", ") // ✅ 선택된 취미 쉼표(,)로 구분하여 출력
+            : "입력해주세요"} */}
+          {profile?.hobby}
         </Content>
       </Box>
       <Box>
@@ -84,16 +85,7 @@ function ContentBox({ profile }) {
       </Box>
       <Box>
         <Title>질병여부</Title>
-        <Content>
-          {profile?.disease
-            ? profile?.disease === "no"
-              ? "질병 없음" // ✅ '질병 없음' 선택 시
-              : profile?.diseaseTypes && profile.diseaseTypes.length > 0
-              ? profile.diseaseTypes.join(", ") // ✅ 선택한 질병 쉼표(,)로 구분
-              : "선택 없음" // ✅ '질병 있음'이지만 추가 질병 선택 안 한 경우
-            : "입력해주세요"}{" "}
-          {/* ✅ 기본값 '입력해주세요' */}
-        </Content>
+        <Content>{profile?.disease || "입력해주세요"}</Content>
       </Box>
     </Container>
   );

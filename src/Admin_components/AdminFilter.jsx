@@ -53,12 +53,41 @@ const categories = [
   // 결혼여부: ["초혼", "재혼"],
   // 취미: ["운동", "독서", "게임", "등산", "여행", "바이크", "요리"],
   { id: 3, title: "성별", name: "gender" },
+  { id: 4, title: "질병", name: "disease" },
+  { id: 5, title: "mbti", name: "mbti" },
 ];
 
 const secondFilter = {
   age: ["20대 초반", "20대 후반", "30대 초반", "30대 후반"],
   job: ["소방관"],
-  gender: ["남성", "여성"],
+  gender: ["남자", "여자"],
+  disease: [
+    "심장병 유전",
+    "고혈압",
+    "당뇨병",
+    "심근경색 유전",
+    "암 가족력",
+    "간 질환",
+    "신장 질환",
+    "질환 없음",
+  ],
+  mbti: [
+    "ISTJ",
+    "ISFJ",
+    "INFJ",
+    "INTJ",
+    "ISTP",
+    "ISFP",
+    "INFP",
+    "INTP",
+    "ESTP",
+    "ESFP",
+    "ENFP",
+    "ENTP",
+    "ESFJ",
+    "ENFJ",
+    "ENTJ",
+  ],
 };
 
 function AdminFilter({ selectedFilters, setSelectedFilters }) {
@@ -67,9 +96,9 @@ function AdminFilter({ selectedFilters, setSelectedFilters }) {
   const toggleCategory = (category) => {
     setActiveCategory(activeCategory === category.name ? null : category.name);
   };
-  const toggle = () => {
-    console.log(selectedFilters);
-  };
+  // const toggle = () => {
+  //   console.log(selectedFilters);
+  // };
 
   const toggleOption = (category, value) => {
     const newFilters = { ...selectedFilters };
@@ -98,7 +127,7 @@ function AdminFilter({ selectedFilters, setSelectedFilters }) {
         ))}
       </CategoryWrapper>
 
-      <button onClick={() => toggle()} />
+      {/* <button onClick={() => toggle()} /> */}
 
       {/* 2차 선택 (세부 옵션) */}
       {activeCategory && (

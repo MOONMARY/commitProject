@@ -4,7 +4,6 @@ import InputField from "./InputField";
 //import { useState } from "react";
 import { useState, useEffect } from "react";
 
-
 const Container = styled.div`
   width: 80%;
   margin-left: 47px;
@@ -41,9 +40,7 @@ const Writing = styled.input`
   color: #555;
 `;
 
-
 function ProfileModalContent({ profile, handleChange }) {
-
   const [showDiseaseOptions, setShowDiseaseOptions] = useState(false);
 
   // ✅ '질병 있음' 선택 시 즉시 반영되도록 설정
@@ -65,21 +62,29 @@ function ProfileModalContent({ profile, handleChange }) {
 
   const handleCheckboxChange = (event) => {
     const selectedValue = event.target.value;
-    const currentValues = profile.diseaseTypes || []; // ✅ undefined 방지
-  
+    const currentValues = profile.disease || []; // ✅ undefined 방지
+
     if (currentValues.includes(selectedValue)) {
       handleChange({
-        target: { name: "diseaseTypes", value: currentValues.filter((v) => v !== selectedValue) }
+        target: {
+          name: "disease",
+          value: currentValues.filter((v) => v !== selectedValue),
+        },
       });
     } else {
-      handleChange({ target: { name: "diseaseTypes", value: [...currentValues, selectedValue] } });
+      handleChange({
+        target: {
+          name: "disease",
+          value: [...currentValues, selectedValue],
+        },
+      });
     }
   };
 
   const options = {
     military: [
-      { label: "군필", value:"yes"},
-      {label: "미군필", value:"no"}
+      { label: "군필", value: "yes" },
+      { label: "미군필", value: "no" },
     ],
     religion: [
       { label: "기독교", value: "christian" },
@@ -87,42 +92,29 @@ function ProfileModalContent({ profile, handleChange }) {
       { label: "천주교", value: "catholic" },
       { label: "힌두교", value: "hinduism" },
       { label: "무교", value: "none" },
-      { label: "기타", value: "other" }
+      { label: "기타", value: "other" },
     ],
     marriage: [
       { label: "재혼", value: "married" },
-      { label: "미혼", value: "single" }
+      { label: "미혼", value: "single" },
     ],
-    // disease: [
-    //   { label: "질병 있음", value: "yes" },
-    //   { label: "질병 없음", value: "no" }
-    // ],
-    // diseaseTypes: [ 
-    //   { label: "심장병 유전", value: "heart_disease" },
-    //   { label: "고혈압", value: "hypertension" },
-    //   { label: "당뇨병", value: "diabetes" },
-    //   { label: "심근경색 유전", value: "myocardial_infarction" },
-    //   { label: "암 가족력", value: "cancer" },
-    //   { label: "간 질환", value: "liver_disease" },
-    //   { label: "신장 질환", value: "kidney_disease" }
-    // ],
+
     mbti: [
-      { label: "ISTJ", value:"ISTJ"},
-      {label: "ISFJ", value:"ISFJ"},
-      { label: "INFJ", value:"INFJ"},
-      { label: "INTJ", value:"INTJ"},
-      { label: "ISTP", value:"ISTP"},
-      { label: "ISFP", value:"ISFP"},
-      { label: "INFP", value:"INFP"},
-      { label: "INTP", value:"INTP"},
-      { label: "ESTP", value:"ESTP"},
-      { label: "ESFP", value:"ESFP"},
-      { label: "ENFP", value:"ENFP"},
-      { label: "ENTP", value:"ENTP"},
-      { label: "ESFJ", value:"ESFJ"},
-      { label: "ENFJ", value:"ENFJ"},
-      { label: "ENTJ ", value:"ENTJ"}   
-    
+      { label: "ISTJ", value: "ISTJ" },
+      { label: "ISFJ", value: "ISFJ" },
+      { label: "INFJ", value: "INFJ" },
+      { label: "INTJ", value: "INTJ" },
+      { label: "ISTP", value: "ISTP" },
+      { label: "ISFP", value: "ISFP" },
+      { label: "INFP", value: "INFP" },
+      { label: "INTP", value: "INTP" },
+      { label: "ESTP", value: "ESTP" },
+      { label: "ESFP", value: "ESFP" },
+      { label: "ENFP", value: "ENFP" },
+      { label: "ENTP", value: "ENTP" },
+      { label: "ESFJ", value: "ESFJ" },
+      { label: "ENFJ", value: "ENFJ" },
+      { label: "ENTJ ", value: "ENTJ" },
     ],
     hobby: [
       { label: "운동", value: "exercise" },
@@ -150,83 +142,89 @@ function ProfileModalContent({ profile, handleChange }) {
       { label: "보드게임", value: "board_games" },
       { label: "라이딩", value: "riding" },
       { label: "크라우드 펀딩", value: "crowdfunding" },
-      { label: "요가", value: "yoga" }
-    ]
+      { label: "요가", value: "yoga" },
+    ],
   };
-
-
 
   return (
     <Container>
-      <InputField 
-            title="몸무게"
-            type="text"
-            name="weight"
-            value={profile.weight}
-            onChange={handleChange} />
-      <InputField 
-            title="키"
-            type="text"
-            name="height"
-            value={profile.height}
-            onChange={handleChange} />
-      <InputField 
-            title="MBTI"
-            type="select"
-            name="mbti"
-            value={profile.mbti}
-            onChange={handleChange}
-            options={options.mbti} />
-      <InputField 
-            title="취미"
-            type="checkbox"
-            name="hobby"
-            value={profile.hobby}
-            onChange={handleChange}
-            options={options.hobby} />
-      <InputField 
-            title="군필여부"
-            type="select"
-            name="military"
-            value={profile.military}
-          onChange={handleChange}
-            options={options.military} />
-      <InputField 
-            title="종교"
-            type="select"
-            name="religion"
-            value={profile.religion}
-            onChange={handleChange}
-            options={options.religion} />
-      <InputField 
-            title="재산"
-            type="text"
-            name="wealth"
-            value={profile.wealth}
-            onChange={handleChange} />
-      <InputField 
-            title="혼인 여부"
-            type="select"
-            name="marriage"
-            value={profile.marriage}
-            onChange={handleChange}
-            options={options.marriage} />
-      <InputField 
-            title="추가 질병 선택"
-            type="checkbox"
-            name="diseaseTypes"
-            value={profile.diseaseTypes || []}  // ✅ 기본값을 빈 배열로 설정
-            onChange={handleChange} 
-            options={[
-              { label: "심장병 유전", value: "heart_disease" },
-              { label: "고혈압", value: "hypertension" },
-              { label: "당뇨병", value: "diabetes" },
-              { label: "심근경색 유전", value: "myocardial_infarction" },
-              { label: "암 가족력", value: "cancer" },
-              { label: "간 질환", value: "liver_disease" },
-              { label: "신장 질환", value: "kidney_disease" },
-              { label: "질환 없음", value: "no" }
-            ]}
+      <InputField
+        title="몸무게"
+        type="text"
+        name="weight"
+        value={profile.weight}
+        onChange={handleChange}
+      />
+      <InputField
+        title="키"
+        type="text"
+        name="height"
+        value={profile.height}
+        onChange={handleChange}
+      />
+      <InputField
+        title="MBTI"
+        type="select"
+        name="mbti"
+        value={profile.mbti}
+        onChange={handleChange}
+        options={options.mbti}
+      />
+      <InputField
+        title="취미"
+        type="checkbox"
+        name="hobby"
+        value={profile.hobby}
+        onChange={handleChange}
+        options={options.hobby}
+      />
+      <InputField
+        title="군필여부"
+        type="select"
+        name="military"
+        value={profile.military}
+        onChange={handleChange}
+        options={options.military}
+      />
+      <InputField
+        title="종교"
+        type="select"
+        name="religion"
+        value={profile.religion}
+        onChange={handleChange}
+        options={options.religion}
+      />
+      <InputField
+        title="재산"
+        type="text"
+        name="wealth"
+        value={profile.wealth}
+        onChange={handleChange}
+      />
+      <InputField
+        title="혼인 여부"
+        type="select"
+        name="marriage"
+        value={profile.marriage}
+        onChange={handleChange}
+        options={options.marriage}
+      />
+      <InputField
+        title="추가 질병 선택"
+        type="checkbox"
+        name="disease"
+        value={profile.disease || []} // ✅ 기본값을 빈 배열로 설정
+        onChange={handleChange}
+        options={[
+          { label: "심장병 유전", value: "심장병 유전" },
+          { label: "고혈압", value: "고혈압" },
+          { label: "당뇨병", value: "당뇨병" },
+          { label: "심근경색 유전", value: "심근경색 유전" },
+          { label: "암 가족력", value: "암 가족력" },
+          { label: "간 질환", value: "간 질환" },
+          { label: "신장 질환", value: "신장 질환" },
+          { label: "질환 없음", value: "질환 없음" },
+        ]}
       />
 
       {/* ✅ '질병 있음' 선택 시 추가 질병 리스트 표시 */}
@@ -252,10 +250,7 @@ function ProfileModalContent({ profile, handleChange }) {
   );
 }
 
-
 export default ProfileModalContent;
-
-
 
 // function ProfileModalContent({ profile, handleChange }) {
 //   return (

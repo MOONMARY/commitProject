@@ -7,7 +7,6 @@ import { useAuth } from "../App";
 import { useLocation } from "react-router-dom";
 import NoInfo from "../profile_components/NoInfo";
 
-
 function Profile() {
   const location = useLocation();
   // console.log(location);
@@ -24,17 +23,30 @@ function Profile() {
   };
 
   const modifyProfile = async (data) => {
+    let hobbyOne = null;
+    let diseaseOne = null;
+    if (!Array.isArray(data.hobby)) {
+      hobbyOne = data.hobby;
+    } else {
+      hobbyOne = data.hobby.join(", ");
+    }
+    if (!Array.isArray(data.disease)) {
+      diseaseOne = data.disease;
+    } else {
+      diseaseOne = data.disease.join(", ");
+    }
+
     const newState = {
       ...profile,
       weight: data.weight,
       height: data.height,
       mbti: data.mbti,
-      hobby: data.hobby,
+      hobby: hobbyOne,
       military: data.military,
       religion: data.religion,
       wealth: data.wealth,
       marriage: data.marriage,
-      disease: data.disease,
+      disease: diseaseOne,
     };
     try {
       const response = await fetch(apiUrl + "/api/profile/modify", {

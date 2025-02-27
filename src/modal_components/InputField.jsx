@@ -49,8 +49,8 @@ const RadioContainer = styled.div`
 `;
 
 const RadioLabel = styled.label`
-display: inline-flex; /* 한 줄 정렬 유지 */
-max-width: 500px; /* 최대 너비 설정 (필요에 따라 조정 가능) */
+  display: inline-flex; /* 한 줄 정렬 유지 */
+  max-width: 500px; /* 최대 너비 설정 (필요에 따라 조정 가능) */
   display: flex;
   align-items: center;
   gap: 5px;
@@ -66,15 +66,14 @@ const SelectBox = styled.select`
   font-size: 1rem;
   padding: 5px;
   // border: 1px solid #ddd;
- //  border-radius: 5px;
+  //  border-radius: 5px;
   background: #fff;
   color: #333;
   border: none;
 `;
 
 function InputField({ title, type, name, value, onChange, options }) {
-
-   // ✅ 취미 & 추가 질병 체크박스 핸들러 (완벽하게 통합)
+  // ✅ 취미 & 추가 질병 체크박스 핸들러 (완벽하게 통합)
   const handleCheckboxChange = (event) => {
     const selectedValue = event.target.value;
     const currentValues = Array.isArray(value) ? value : [];
@@ -88,7 +87,6 @@ function InputField({ title, type, name, value, onChange, options }) {
 
     onChange({ target: { name, value: updatedValues } });
   };
-
 
   return (
     <Box>
@@ -104,7 +102,7 @@ function InputField({ title, type, name, value, onChange, options }) {
               </option>
             ))}
           </SelectBox>
-        ) : ["hobby", "diseaseTypes"].includes(name) ? (
+        ) : ["hobby", "disease"].includes(name) ? (
           // ✅ 취미 & 추가 질병 체크박스 (완벽 적용)
           <RadioContainer>
             {options?.map((option) => (
@@ -120,8 +118,6 @@ function InputField({ title, type, name, value, onChange, options }) {
               </RadioLabel>
             ))}
           </RadioContainer>
-
-        
         ) : type === "radio" ? (
           // ✅ 일반 라디오 버튼 처리
           <RadioContainer>
@@ -146,7 +142,5 @@ function InputField({ title, type, name, value, onChange, options }) {
     </Box>
   );
 }
-
-
 
 export default InputField;
