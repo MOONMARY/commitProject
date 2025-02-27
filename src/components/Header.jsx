@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Logo from "../images/Logo.png"; // 로컬 이미지 import
+import PropTypes from "prop-types"; // PropTypes import
 
 const HeaderContainer = styled.div`
   width: 100%;
@@ -28,12 +29,13 @@ const LogoImage = styled.img`
 `;
 
 const MenuButton = styled.button`
-@font-face {
-    font-family: 'Jal_Onuel';
-    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10-21@1.0/Jal_Onuel.woff') format('woff');
+  @font-face {
+    font-family: "Jal_Onuel";
+    src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10-21@1.0/Jal_Onuel.woff")
+      format("woff");
     font-weight: normal;
     font-style: normal;
-}
+  }
 
   flex: 1;
   height: 100%;
@@ -45,7 +47,7 @@ const MenuButton = styled.button`
   cursor: pointer;
   transition: all 0.3s ease-in-out;
 
-  font-family: 'Jal_Onuel';
+  font-family: "Jal_Onuel";
 
   &:hover {
     background-color: #f28888;
@@ -53,17 +55,19 @@ const MenuButton = styled.button`
   }
 `;
 
-function Header({userSession,deleteSession}) {
+function Header({ userSession, deleteSession }) {
   const navigate = useNavigate();
 
   let content = null;
 
-  if(userSession === null) {(
-    content =  <MenuButton onClick={() => navigate("/SignIn")}>로그인</MenuButton>
-  )
+  if (userSession === null) {
+    content = (
+      <MenuButton onClick={() => navigate("/SignIn")}>로그인</MenuButton>
+    );
   } else {
-    content = <MenuButton onClick={() => deleteSession()}>로그아웃</MenuButton>
+    content = <MenuButton onClick={() => deleteSession()}>로그아웃</MenuButton>;
   }
+  const isAdmin = userSession && userSession.member === "admin";
 
   return (
     <HeaderContainer>
@@ -74,13 +78,24 @@ function Header({userSession,deleteSession}) {
       <MenuButton>고객서비스</MenuButton>
       <MenuButton onClick={() => navigate("/Test")}>회원테스트</MenuButton>
       <MenuButton onClick={() => navigate("/Reviews")}>회원리뷰</MenuButton>
-      <MenuButton onClick={() => navigate("/MyPage")}>마이페이지</MenuButton>
+      {/* <MenuButton onClick={() => navigate("/MyPage")}>마이페이지</MenuButton> */}
+      <MenuButton onClick={() => navigate(isAdmin ? "/Admin" : "/MyPage")}>
+        {isAdmin ? "관리자페이지" : "마이페이지"}
+      </MenuButton>
       {/* <MenuButton onClick={() => navigate("/SignIn")}>로그인</MenuButton> */}
       {content}
       <MenuButton onClick={() => navigate("/SignUp")}>회원가입</MenuButton>
     </HeaderContainer>
   );
 }
+
+// PropTypes validation 추가
+Header.propTypes = {
+  userSession: PropTypes.shape({
+    member: PropTypes.string.isRequired, // member는 문자열이어야 하고 필수값임
+  }).isRequired,
+  deleteSession: PropTypes.func.isRequired,
+};
 
 export default Header;
 

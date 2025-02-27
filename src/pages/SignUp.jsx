@@ -5,8 +5,6 @@ import { useState } from "react";
 import { useContext } from "react";
 import { useAuth } from "../App";
 
-
-
 function SignUp() {
   const [signUpInfo, setSignUpInfo] = useState({
     name: "",
@@ -31,7 +29,7 @@ function SignUp() {
 
   const addUser = async () => {
     try {
-      const response = await fetch(apiUrl + "/api/user/join/agreement", {
+      const response = await fetch(apiUrl + "/api/user/join", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -47,11 +45,8 @@ function SignUp() {
     }
   };
 
-  
-
   return (
     <>
-      
       <SignUpForm
         signUpInfo={signUpInfo}
         handleChange={handleChange}

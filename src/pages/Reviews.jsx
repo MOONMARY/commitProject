@@ -30,7 +30,6 @@ function Reviews() {
 
   return (
     <>
-      
       <ReviewsContent reviews={reviews} />
       <Footer />
     </>
