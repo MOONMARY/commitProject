@@ -1,6 +1,16 @@
 import styled from "styled-components";
 
 const Button = styled.button`
+@font-face {
+    font-family: "MapoPeacefull";
+    src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/MapoPeacefullA.woff")
+      format("woff");
+    font-weight: normal;
+    font-style: normal;
+    
+  }
+
+  font-family: "MapoPeacefull";
   width: 100px;
   height: 40px;
   font-size: 1rem;
@@ -12,6 +22,14 @@ const Button = styled.button`
   overflow: hidden;
   transition: all 0.3s ease-in-out;
   border-radius: 5px;
+  margin-bottom: 100px;
+  margin-top: 30px;
+
+  display: inline-block; /* 버튼을 인라인 블록 요소로 설정하여 가로 정렬 가능하게 만듦 */
+  margin-left: 15px; /* 버튼 간격 조절 */
+  margin-right: 15px;
+  
+
 
   &::after {
     content: "";

@@ -48,6 +48,7 @@ const SummaryBox = styled.div`
 `;
 
 const SummaryTitle = styled.h3`
+  
   font-size: 16px;
   color: rgb(199, 81, 81);
   margin-bottom: 5px;

@@ -13,7 +13,9 @@ const Container = styled.div`
 
 const Box = styled.div`
   margin: 20px;
+
   border-radius: 20px;
+
   width: 80%;
   max-width: 800px;
   padding: 30px;

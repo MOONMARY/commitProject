@@ -5,6 +5,26 @@ import FamilyContent from "../family_components/FamilyContent";
 import { useLocation } from "react-router-dom";
 import { useAuth } from "../App";
 import NoInfo from "../family_components/NoInfo";
+import styled from "styled-components";
+
+const Text = styled.div`
+  @font-face {
+    font-family: "MapoPeacefull";
+    src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/MapoPeacefullA.woff")
+      format("woff");
+    font-weight: normal;
+    font-style: normal;
+  }
+
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #9ac4d8;
+  margin-top: 110px;
+  font-family: "MapoPeacefull";
+  margin-bottom: 50px;
+`;
+
 
 function Family() {
   const location = useLocation();
@@ -89,7 +109,7 @@ function Family() {
 
   useEffect(() => {
     getFamily();
-    console.log("getfam발동");
+    // console.log("getfam발동");
   }, [family]);
 
   if (open === true) {
@@ -109,7 +129,9 @@ function Family() {
   if (family.id === "") {
     mainContent = (
       <>
-        <div>테이블 없음 인서트 하러 가기</div>
+        <div>
+          <Text>가족 사항 추가하기</Text>
+        </div>
         <NoInfo ControllModal={ControllModal} />
         {content}
       </>

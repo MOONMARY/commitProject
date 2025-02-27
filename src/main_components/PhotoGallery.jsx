@@ -74,6 +74,36 @@ const TextContainer = styled.div`
   font-family: 'OG_Renaissance_Secret-Rg';
   line-height: 3; /* ✅ 줄 간격 조절 */
 
+  /* ✅ 빛이 스쳐 지나가는 효과 */
+  position: relative;
+  overflow: hidden;
+  white-space: nowrap;
+
+  &::after { 
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%; /* 처음에는 왼쪽 바깥에 위치 */
+    width: 200%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.5), transparent);
+    animation: highlight 3s infinite linear; /* ✅ 3초마다 반복 */
+  }
+
+  @keyframes highlight { /* ✅ 빛이 지나가는 애니메이션 */
+    0% { left: -100%; }
+    100% { left: 100%; }
+  }
+
+  /* ✅ 부드러운 흔들림 효과 */
+  animation: softShake 6s infinite ease-in-out;
+
+  @keyframes softShake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-1px); }
+    50% { transform: translateX(1px); }
+    75% { transform: translateX(-0.5px); }
+  }
 `;
 
 // ✅ 버튼 컨테이너 (대각선 배치)

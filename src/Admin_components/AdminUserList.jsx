@@ -27,7 +27,7 @@ const Avatar = styled.img`
 `;
 
 function AdminUserList({ users, onSelectUser }) {
-  console.log(users);
+  // console.log(users);
   return (
     <UserListContainer>
       {users?.map((user) => (

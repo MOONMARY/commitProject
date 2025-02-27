@@ -67,31 +67,62 @@ const ChartContainer = styled.div`
 `;
 
 const CenterText = styled.div`
+  @font-face {
+     font-family: 'KOMACON';
+     src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_seven@1.2/KOMACON.woff') format('woff');
+     font-weight: normal;
+     font-style: normal;
+}
+
+  font-family: 'KOMACON';
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  font-size: 24px;
+  font-size: 25px;
   font-weight: bold;
   color: #0D0D0D;
 `;
 
 const StyledLabel = styled.text`
-  font-size: 14px;
+
+@font-face {
+     font-family: 'KOMACON';
+     src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_seven@1.2/KOMACON.woff') format('woff');
+     font-weight: normal;
+     font-style: normal;
+}
+
+font-family: 'KOMACON';
+  font-size: 17px;
   font-weight: bold;
   text-anchor: middle;
   fill: #0D0D0D;
 `;
 
 const Title = styled.h2`
-  font-size: 33px;
+  @font-face {
+    font-family: 'Binggrae-Two';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/Binggrae-Bold.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+font-family: 'Binggrae-Two';
+  font-size: 38px;
   font-weight: bold;
   color: #0D0D0D;
   margin-bottom: 10px;
 `;
 
 const Description = styled.p`
-  font-size: 13px;
+  @font-face {
+    font-family: 'TTWanjunuricheR';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2307-1@1.1/TTWanjunuricheR.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+font-family: 'TTWanjunuricheR';
+  font-size: 18px;
   color: #0D0D0D;
   line-height: 1.6;
 `;

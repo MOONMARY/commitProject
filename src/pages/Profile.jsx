@@ -5,11 +5,13 @@ import Modal from "../modal_components/Modal";
 import ProfileContent from "../profile_components/ProfileContent";
 import { useAuth } from "../App";
 import { useLocation } from "react-router-dom";
+import NoInfo from "../profile_components/NoInfo";
+
 
 function Profile() {
   const location = useLocation();
   // console.log(location);
-  const [profile, setProfile] = useState(location.state.degree);
+  const [profile, setProfile] = useState(location.state.profile);
   const [open, setOpen] = useState(false);
   const apiUrl = "http://localhost:8927";
   const { userSession } = useAuth();
@@ -21,19 +23,68 @@ function Profile() {
     open ? setOpen(false) : setOpen(true);
   };
 
-  const addProfile = (profile) => {
-    const newProfile = {
-      weight: profile.weight,
-      height: profile.height,
-      mbti: profile.mbti,
-      hobby: profile.hobby,
-      military: profile.military,
-      religion: profile.religion,
-      wealth: profile.wealth,
-      marriage: profile.marriage,
-      disease: profile.disease,
+  const modifyProfile = async (data) => {
+    const newState = {
+      ...profile,
+      weight: data.weight,
+      height: data.height,
+      mbti: data.mbti,
+      hobby: data.hobby,
+      military: data.military,
+      religion: data.religion,
+      wealth: data.wealth,
+      marriage: data.marriage,
+      disease: data.disease,
     };
-    console.log(JSON.stringify(newProfile));
+    try {
+      const response = await fetch(apiUrl + "/api/profile/modify", {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newState),
+      });
+      if (!response.ok) {
+        console.log(newState);
+        throw new Error("데이터를 추가하지 못했습니다.");
+      }
+      console.log(newState);
+      ControllModal();
+    } catch (Error) {
+      console.log(Error);
+    }
+  };
+
+  const addProfileInfo = async (data) => {
+    const newState = {
+      weight: data.weight,
+      height: data.height,
+      mbti: data.mbti,
+      hobby: data.hobby,
+      military: data.military,
+      religion: data.religion,
+      wealth: data.wealth,
+      marriage: data.marriage,
+      disease: data.disease,
+      userId: userSession.id,
+    };
+    try {
+      const response = await fetch(apiUrl + "/api/profile/insert", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newState),
+      });
+      if (!response.ok) {
+        throw new Error("데이터를 추가하지 못했습니다.");
+      }
+      console.log(JSON.stringify(newState));
+      getProfile();
+      ControllModal();
+    } catch (Error) {
+      console.log(Error);
+    }
   };
 
   const getProfile = async () => {
@@ -58,16 +109,34 @@ function Profile() {
       <Modal
         ControllModal={ControllModal}
         concept={"profile"}
-        addState={addProfile}
+        modifyProfile={modifyProfile}
+        profileInfo={profile}
+        addProfileInfo={addProfileInfo}
       />
     );
   } else if (open === false) {
     content = null;
   }
+
+  if (profile.id === "") {
+    mainContent = (
+      <>
+        <div>테이블 없음 인서트 하러 가기</div>
+        <NoInfo ControllModal={ControllModal} />
+        {content}
+      </>
+    );
+  } else {
+    mainContent = (
+      <>
+        <ProfileContent ControllModal={ControllModal} profile={profile} />
+        {content}
+      </>
+    );
+  }
   return (
     <>
-      <ProfileContent ControllModal={ControllModal} />
-      {content}
+      {mainContent}
       <Footer />
     </>
   );

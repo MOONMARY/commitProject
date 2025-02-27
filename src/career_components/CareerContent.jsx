@@ -39,6 +39,13 @@ const Button = styled.button`
   transition: all 0.3s ease-in-out;
   border-radius: 5px;
 
+  margin-bottom: 100px;
+  margin-top: 30px;
+
+  display: inline-block; /* 버튼을 인라인 블록 요소로 설정하여 가로 정렬 가능하게 만듦 */
+  margin-left: 15px; /* 버튼 간격 조절 */
+  margin-right: 15px;
+
   &::after {
     content: "";
     position: absolute;

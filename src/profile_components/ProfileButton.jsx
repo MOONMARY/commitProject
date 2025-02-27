@@ -5,21 +5,13 @@ const Button = styled.button`
   height: 40px;
   font-size: 1rem;
   font-weight: bold;
-  color: #d99696; /* 기본 텍스트 색 */
+  color: #a188ce; /* 기본 텍스트 색 */
   background: #ffffff;
   border: none;
   position: relative;
   overflow: hidden;
   transition: all 0.3s ease-in-out;
   border-radius: 5px;
-
-  margin-bottom: 100px;
-  margin-top: 30px;
-
-  display: inline-block; /* 버튼을 인라인 블록 요소로 설정하여 가로 정렬 가능하게 만듦 */
-  margin-left: 15px; /* 버튼 간격 조절 */
-  margin-right: 15px;
-
 
   &::after {
     content: "";
@@ -28,7 +20,7 @@ const Button = styled.button`
     height: 100%;
     top: 0;
     left: -100%;
-    background: #d99696;
+    background: #a188ce;
     transition: left 0.3s ease-in-out;
   }
 
@@ -50,15 +42,15 @@ const Button = styled.button`
 
   /* ✅ 백그라운드 색이 사라지면 원래 색으로 복귀 */
   &:not(:hover) span {
-    color: #d99696;
+    color: #a188ce;
   }
 `;
 
-
-
-
-function DegreeButton({text, onClick}) {
-    return <Button onClick={onClick}><span>{text}</span></Button>
-
+function ProfileButton({ text, onClick }) {
+  return (
+    <Button onClick={onClick}>
+      <span>{text}</span>
+    </Button>
+  );
 }
-export default DegreeButton;
+export default ProfileButton;

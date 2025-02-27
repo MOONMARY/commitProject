@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import CEOImage from "../images/ceo.jpg"; // ✅ 대표 이미지 import
+import CEOImage from "../images/ceo2.jpg"; // ✅ 대표 이미지 import
 
 // ✅ 섹션 전체 스타일
 const Section = styled.div`

@@ -5,6 +5,26 @@ import Modal from "../modal_components/Modal";
 import { useLocation } from "react-router-dom";
 import NoInfo from "../degree_components/NoInfo";
 import { useAuth } from "../App";
+import styled from "styled-components";
+
+const Text = styled.div`
+  @font-face {
+    font-family: "MapoPeacefull";
+    src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/MapoPeacefullA.woff")
+      format("woff");
+    font-weight: normal;
+    font-style: normal;
+  }
+
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #d99696;
+  margin-top: 110px;
+  font-family: "MapoPeacefull";
+  margin-bottom: 50px;
+`;
+
 
 function Degree() {
   const location = useLocation();
@@ -114,7 +134,9 @@ function Degree() {
   if (degree.id === "") {
     mainContent = (
       <>
-        <div>테이블 없음 인서트 하러 가기</div>
+        <div>
+        <Text>학위 정보 추가하기</Text>
+        </div>
         <NoInfo ControllModal={ControllModal} />
         {content}
       </>

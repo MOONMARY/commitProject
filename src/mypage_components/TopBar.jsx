@@ -168,15 +168,16 @@ function TopBar({ getDegree, getCareer, getProfile, getFamily }) {
   const uploadPhoto = async (file) => {
     const formData = new FormData();
     formData.append("file", file);
+    const id = 1;
     try {
-      const response = await fetch(apiUrl + "/api/profile/photoupload", {
-        method: "POST",
-        // headers: {
-        //   "Content-Type": "application/json",
-        // },
-        body: formData,
-        credentials: "include",
-      });
+      const response = await fetch(
+        apiUrl + "/api/photo/upload?profileId=" + id,
+        {
+          method: "POST",
+          body: formData,
+          credentials: "include",
+        }
+      );
       if (!response.ok) {
         throw new Error("데이터를 추가하지 못했습니다.");
       }

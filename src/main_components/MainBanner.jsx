@@ -14,6 +14,37 @@ const fadeIn = keyframes`
   }
 `;
 
+// ✅ 반딧불이 애니메이션 (랜덤한 위치에서 이동)
+const fireflyAnimation = keyframes`
+  0% {
+    transform: translate(0, 0);
+    opacity: 0.8;
+  }
+  50% {
+    transform: translate(-10px, 15px);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(10px, -15px);
+    opacity: 0.8;
+  }
+`;
+
+
+// ✅ 반딧불이 효과 스타일
+const Firefly = styled.div`
+  position: absolute;
+  width: ${({ size }) => size}px; /* 랜덤 크기 */
+  height: ${({ size }) => size}px;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 50%;
+  filter: blur(2px);
+  top: ${({ top }) => top}%;
+  left: ${({ left }) => left}%;
+  animation: ${fireflyAnimation} ${({ duration }) => duration}s infinite alternate ease-in-out;
+  opacity: 0.8;
+`;
+
 // ✅ 배너 컨테이너
 const BannerContainer = styled.div`
   width: 100%;
@@ -83,13 +114,31 @@ function MainBanner() {
     };
   }, []);
 
+  // ✅ 반딧불이 개수와 랜덤 위치 설정
+  const fireflies = Array.from({ length: 12 }).map((_, index) => ({
+    id: index,
+    size: Math.random() * 8 + 5, // 크기 (5px ~ 13px)
+    top: Math.random() * 90, // 랜덤 위치 (상단 ~ 하단)
+    left: Math.random() * 90, // 랜덤 위치 (좌측 ~ 우측)
+    duration: Math.random() * 3 + 2, // 애니메이션 속도 (2초 ~ 5초)
+  }));
+
   return (
     <BannerContainer ref={bannerRef}>
       <Banner>
         <AnimatedText $isVisible={isVisible}>당신의 인연을 COMMIT 해드립니다</AnimatedText>
+       {/* ✅ 반딧불이 요소 추가 */}
+        {fireflies.map((firefly) => (
+          <Firefly
+            key={firefly.id}
+            size={firefly.size}
+            top={firefly.top}
+            left={firefly.left}
+            duration={firefly.duration}
+          />
+        ))}
       </Banner>
     </BannerContainer>
   );
 }
-
 export default MainBanner;

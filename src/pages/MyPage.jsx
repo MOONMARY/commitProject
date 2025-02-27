@@ -95,42 +95,6 @@ function MyPage() {
       });
     }
   };
-
-  // const apiUrl = "http://localhost:8927"
-  // const {userSession} = useAuth();
-  // const [degreeOn, setDegreeOn] = useState(false);
-  // const [degree, setDegree] = useState();
-  // // const [loading, setLoading] = useState(true); // 로딩 상태 추가
-
-  // // useEffect(() => {
-  // //   if (userSession !== null) {
-  // //     setLoading(false); // ✅ userSession이 있으면 로딩 종료
-  // //   }
-  // // }, [userSession]);
-
-  // // useEffect(() => {
-  // //   if (degreeOn && degree) {  // ✅ degreeOn이 true이고 degree가 있을 때만 실행
-  // //     navigate('/degree', { state: { degree } });
-  // //   }
-  // // }, [degreeOn, degree, navigate]);  // ✅ degreeOn을 의존성 배열에 추가
-
-  // // useEffect(() => {
-  // //   // ✅ 새로고침해도 userSession 유지하도록 localStorage에서 가져오기
-  // //   const storedUserSession = localStorage.getItem("userSession");
-  // //   if (!userSession && storedUserSession) {
-  // //     setLoading(true); // 로딩 상태 유지
-  // //   }
-  // // }, [userSession]);
-
-  // const getDegree = async () => {
-
-  // try {
-  //   const response = await fetch(apiUrl + "/api/degree/" + userSession.id);
-  //   if (!response.ok) {
-  //     throw new Error("데이터를 받아오지 못했습니다.");
-
-  //   }
-
   const getCareer = async () => {
     try {
       const response = await fetch(apiUrl + "/api/career/" + userSession.id);
